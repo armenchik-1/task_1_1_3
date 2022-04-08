@@ -16,6 +16,7 @@ public class Main {
         userService.saveUser("Bob", "Williams", (byte) 51);
         userService.saveUser("Jack", "Peterson", (byte) 20);
         userService.saveUser("Richard", "Harrison", (byte) 25);
+//        userService.removeUserById(3);
 
         for (User user : userService.getAllUsers()) {
             System.out.println(user);
@@ -23,6 +24,8 @@ public class Main {
 
         userService.cleanUsersTable();
         userService.dropUsersTable();
+
+
 
     }
 }
