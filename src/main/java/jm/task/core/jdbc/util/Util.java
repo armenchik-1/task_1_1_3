@@ -17,26 +17,19 @@ public class Util {
 
     private static Connection connection;
 
-    static {
-        try {
-//            DriverManager.registerDriver(new Driver());
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static Connection getConnection() {
+        if (connection == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return connection;
     }
 
+//******************************************************************************
 
     private static SessionFactory sessionFactory;
 

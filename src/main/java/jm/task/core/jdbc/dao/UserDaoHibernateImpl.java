@@ -13,10 +13,6 @@ import java.util.List;
 import static jm.task.core.jdbc.util.Util.getSessionFactory;
 
 public class UserDaoHibernateImpl implements UserDao {
-    public UserDaoHibernateImpl() {
-
-    }
-
 
     @Override
     public void createUsersTable() {
@@ -67,7 +63,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             System.out.println("User с именем – " + name + " добавлен в базу данных ");
         } catch (Exception e) {
-//            transaction.rollback();
+            transaction.rollback();
             e.printStackTrace();
         }
     }
@@ -79,7 +75,6 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             session.delete(user);
-//            session.createQuery("DELETE from User where id= :id").setParameter("id", id).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -90,7 +85,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         try (Session session = Util.getSessionFactory().openSession()) {
-            return session.createQuery("FROM User", User.class).list();
+            return session.createQuery("FROM User", User.class).getResultList();
         }
     }
 

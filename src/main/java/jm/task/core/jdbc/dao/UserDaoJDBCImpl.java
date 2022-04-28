@@ -12,11 +12,6 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-
-    public UserDaoJDBCImpl() {
-
-    }
-
     public void createUsersTable() {
         String SQL = "CREATE TABLE IF NOT EXISTS users (" +
                 "id BIGINT NOT NULL AUTO_INCREMENT," +
